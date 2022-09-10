@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-size: 36px;
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+}
+header{
+    background-color: lightgray;
+    text-align: center;
+    padding: 12px 24px;
+    /* margin-bottom: 10px; */
+}
+.cointerner{
+    background-color: lightcyan;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 6px 12px;
+    
+}
+.form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: baseline;
+}
+.form input{
+    width: 50%;
+    height: 40px;
+    font-size: 36px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+.btn_add{
+    width: 40%;
+    height: 40px;
+    font-size: 30px;
+    border: 1px solid lightgray;
+    background-color: lightgrey
+}
+.categories{
+    width: 40%;
+    height: 40px;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+.list_tasks{
+    padding: 12px 24px;
+}
+.list_tasks ul{
+    list-style: none;
+}
