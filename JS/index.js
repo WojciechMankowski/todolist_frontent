@@ -37,27 +37,29 @@ const render = () => {
 const change = () => {
   const notDone = document.querySelectorAll(".notDone:checked");
   console.log(notDone);
-  const listDone = [...notDone]
-  const element = listDone[0]
-  
-  if (element.className === "notDone"){
-    console.log(element.className);
-  }
+  const listDone = [...notDone];
+  listDone
+    .filter((element) => element.className === "notDone")
+    .forEach((element) => {
+      const key = element.accessKey;
+      const li = document.getElementsByClassName(key)[0];
+      li.classList.replace(key, "done");
+    });
 };
-
+let nextLi = 0;
 const creatElement = (task) => {
   const element_li = document.createElement("li");
   const element_checbox = document.createElement("input");
   element_checbox.type = "checkbox";
   element_checbox.classList.add("notDone");
   element_checbox.addEventListener("click", change);
-  element_checbox.accessKey = task.title;
+  element_checbox.accessKey = nextLi;
   const element_strong = document.createElement("strong");
   element_strong.innerText = task.title;
-  const classLi = `${task.title}`;
-  element_li.className = classLi;
+  element_li.classList.add(nextLi);
   element_li.appendChild(element_checbox);
   element_li.appendChild(element_strong);
+  nextLi++;
   return element_li;
 };
 
