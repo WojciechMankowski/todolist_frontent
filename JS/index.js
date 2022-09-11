@@ -1,19 +1,13 @@
-// znaleścienie inputa, selevt i przycisku
 const input_name = document.querySelector("input");
 const select = document.querySelector("select");
 const btn = document.querySelector("button");
-let nextTask = 0;
-// znalezienie listy UL
 const listTasks = document.querySelector("ul");
-// stworzenie listy zadań
+
+let nextTask = 0;
+
 let taks = [
   {
     title: "Dokończyć pisanie aplikacji todo",
-    categories: "Programowanie",
-    finished: false,
-  },
-  {
-    title: "Pojść na warszty",
     categories: "Programowanie",
     finished: false,
   },
@@ -35,22 +29,37 @@ const add_new_task = () => {
   taks.push(task);
   show_new_task();
 };
-// renderowanie listy zadań
-const render = (index) => {
+const render = () => {
   taks.forEach((element) => {
     listTasks.appendChild(creatElement(element));
   });
 };
-// tworzenia elementu do wyświetlania zadania
+const change = () => {
+  const notDone = document.querySelectorAll(".notDone:checked");
+  console.log(notDone);
+  const listDone = [...notDone]
+  const element = listDone[0]
+  
+  if (element.className === "notDone"){
+    console.log(element.className);
+  }
+};
+
 const creatElement = (task) => {
   const element_li = document.createElement("li");
   const element_checbox = document.createElement("input");
   element_checbox.type = "checkbox";
+  element_checbox.classList.add("notDone");
+  element_checbox.addEventListener("click", change);
+  element_checbox.accessKey = task.title;
   const element_strong = document.createElement("strong");
   element_strong.innerText = task.title;
+  const classLi = `${task.title}`;
+  element_li.className = classLi;
   element_li.appendChild(element_checbox);
   element_li.appendChild(element_strong);
   return element_li;
 };
-render(0);
+
+render();
 btn.addEventListener("click", add_new_task);

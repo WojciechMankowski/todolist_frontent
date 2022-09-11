@@ -54,3 +54,6 @@ header{
 .list_tasks ul{
     list-style: none;
 }
+.done{
+    background-color: red;
+}
