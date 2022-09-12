@@ -4,22 +4,21 @@
     box-sizing: border-box;
 }
 body{
-    font-size: 36px;
+    font-size: 2em;
     height: 100vh;
     font-family: 'Montserrat', sans-serif;
 }
 header{
     background-color: lightgray;
     text-align: center;
-    padding: 12px 24px;
-    /* margin-bottom: 10px; */
+    padding: 1rem;
 }
 .cointerner{
     background-color: lightcyan;
     width: 80%;
     margin-right: auto;
     margin-left: auto;
-    padding: 6px 12px;
+    padding: 0.4rem 1rem;
     
 }
 .form{
@@ -31,9 +30,8 @@ header{
 .form input{
     width: 50%;
     height: 40px;
-    font-size: 36px;
-    margin-bottom: 15px;
-    margin-top: 10px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 .btn_add{
     width: 40%;
@@ -54,6 +52,10 @@ header{
 .list_tasks ul{
     list-style: none;
 }
-.done{
-    background-color: red;
+.done strong{
+    text-decoration: line-through;
+    font-weight: 100;
+}
+ul li input{
+    margin-right: 1.5rem;
 }
