@@ -1,78 +1,42 @@
-import creatElement from './createElement.js';
+import { createDiv, render } from "./Render.js";
+const input_name = document.querySelector("input");
+const btn = document.querySelector("button");
+const element_lisTasks = document.querySelector(".lisTasks");
 
-const input_name = document.querySelector('input');
-const select = document.querySelector('select');
-const btn = document.querySelector('button');
-const listTasks = document.querySelector('ul');
-
+const Tasks = ["Kup huba"];
 let nextTask = 0;
+const checboxList = [];
 
-
-let taks = [
-	{
-		title: 'Dokończyć pisanie aplikacji todo',
-		categories: 'Programowanie',
-		finished: false,
-	},
-	{
-		title: 'Dokończyć pisanie ',
-		categories: 'Programowanie',
-		finished: false,
-	},
-	{
-		title: 'aplikacji todo',
-		categories: 'Programowanie',
-		finished: false,
-	},
-	{
-		title: 'todo',
-		categories: 'Programowanie',
-		finished: false,
-	},
-];
-
-const show_new_task = () => {
-	listTasks.appendChild(creatElement(taks[nextTask], changeOfState));
+const checkTheCheckbox = () => {
+  const listSpan = [...element_lisTasks.querySelectorAll("span")];
+  let checbox = checboxList.filter(
+    (element) => element.checked && element.className == "checkbox"
+  )[0];
+  checbox.classList.replace('checkbox', "done")
+  const id_task = checbox.id
+  const span = listSpan[id_task]
+  span.classList.replace('notDone', 'done')
 };
 
-const add_new_task = () => {
-	nextTask++;
-	const title = input_name.value;
-	const categories = select.value;
-	const task = {
-		title: title,
-		categories: categories,
-		finished: false,
-	};
-	taks.push(task);
-	show_new_task();
+const getchecbox = () => {
+  checboxList.push(...document.querySelectorAll(".checkbox"));
+  checboxList.forEach((element) => {
+    element.addEventListener("click", checkTheCheckbox);
+  });
 };
 
-const changeOfState = () => {
-	const notDones = [...document.querySelectorAll('.notDone:checked')];
-	notDones
-		.filter((element) => {
-      const classNames = element.classList[0]
-      return classNames === 'notDone'})
-		.forEach((element) => {
-      element.classList.replace('notDone', 'done')
-    });
-    const dones = [...document.querySelectorAll('.done')];
-    dones.forEach(element => {
-      const id = element.classList[1]
-      taks[id].finished = true
-      const nameClass = `.${id}`
-      const elementsLi = listTasks.querySelectorAll('li')
-      const elementLi = elementsLi[id]
-      elementLi.classList.add("done")
-    })
+Tasks.forEach((element) => {
+  element_lisTasks.appendChild(render(element)), (nextTask += 1);
+});
+getchecbox();
+
+const addTask = () => {
+  const nameTask = input_name.value;
+  Tasks.push(nameTask);
+  console.log(Tasks);
+  element_lisTasks.appendChild(createDiv(Tasks[nextTask]));
+  nextTask += 1;
+  getchecbox();
 };
 
-const render = () => {
-	taks.forEach((element) => {
-		listTasks.appendChild(creatElement(element, changeOfState));
-	});
-
-
-render();
-btn.addEventListener('click', add_new_task);
+btn.addEventListener("click", addTask);
