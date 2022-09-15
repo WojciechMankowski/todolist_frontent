@@ -40,12 +40,16 @@ header{
     border: 1px solid lightgray;
     background-color: lightgrey
 }
-.categories{
-    width: 40%;
+#categories{
+    width: 50%;
     height: 40px;
     font-size: 30px;
     margin-bottom: 15px;
 }
 .done {
     text-decoration: line-through;
+}
+i{
+    padding: 6px;
+    
 }

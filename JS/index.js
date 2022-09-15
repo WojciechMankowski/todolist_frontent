@@ -3,9 +3,9 @@ import { createDiv, render } from "./Render.js";
 const input_name = document.querySelector("input");
 const btn = document.querySelector("button");
 const element_lisTasks = document.querySelector(".lisTasks");
-
+const categories_select = document.querySelector('#categories')
 const Tasks = [{
-  title: 'Kup huba do macbooka', done: true
+  title: 'Kup huba do macbooka', done: true, category: 'buy'
 }];
 let nextTask = 0;
 const checboxList = [];
@@ -36,9 +36,11 @@ getchecbox();
 
 const addTask = () => {
   const nameTask = input_name.value;
+  const category = categories_select.value
+  console.log(category);
   Tasks.push(
     {
-      title: nameTask, done: false}
+      title: nameTask, done: false, category: category}
   );
   element_lisTasks.appendChild(createDiv(Tasks[nextTask]));
   nextTask += 1;
