@@ -1,9 +1,12 @@
 import { createDiv, render } from "./Render.js";
+
 const input_name = document.querySelector("input");
 const btn = document.querySelector("button");
 const element_lisTasks = document.querySelector(".lisTasks");
 
-const Tasks = ["Kup huba"];
+const Tasks = [{
+  title: 'Kup huba do macbooka', done: true
+}];
 let nextTask = 0;
 const checboxList = [];
 
@@ -15,6 +18,7 @@ const checkTheCheckbox = () => {
   checbox.classList.replace('checkbox', "done")
   const id_task = checbox.id
   const span = listSpan[id_task]
+  Tasks[id_task].done = true
   span.classList.replace('notDone', 'done')
 };
 
@@ -32,8 +36,10 @@ getchecbox();
 
 const addTask = () => {
   const nameTask = input_name.value;
-  Tasks.push(nameTask);
-  console.log(Tasks);
+  Tasks.push(
+    {
+      title: nameTask, done: false}
+  );
   element_lisTasks.appendChild(createDiv(Tasks[nextTask]));
   nextTask += 1;
   getchecbox();
