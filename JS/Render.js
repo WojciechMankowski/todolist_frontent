@@ -1,5 +1,6 @@
 let idTask = 0;
 
+
 const createSpan = (task) => {
   const span = document.createElement("span");
   span.innerText = task.title;
@@ -12,6 +13,17 @@ const createSpan = (task) => {
   return span;
 };
 
+const creatingButton = (text, Tasks) => {
+  const btn = document.createElement('button')
+  
+  if (text == 'remove'){
+    btn.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
+    btn.classList.add('remove')
+    // btn.addEventListener('click', () => removeTask(idTask))
+  }
+  // btn.innerText = text
+  return btn
+}
 const checbox = (done) => {
   const input = document.createElement("input");
   input.type = "checkbox";
@@ -35,20 +47,24 @@ const createIcon = (category) => {
   }
   return icon;
 };
-export const createDiv = (task) => {
+export const createDiv = (task, Tasks) => {
   const div = document.createElement("div");
+  div.id = idTask
   div.appendChild(checbox(task.done));
   div.appendChild(createIcon(task.category));
   div.appendChild(createSpan(task));
+  div.appendChild(creatingButton('remove'))
   idTask += 1;
   return div;
 };
 
-export const render = (task) => {
+export const render = (task, Tasks) => {
   const div = document.createElement("div");
+  div.id = idTask
   div.appendChild(checbox(task.done));
   div.appendChild(createIcon(task.category));
   div.appendChild(createSpan(task));
+  div.appendChild(creatingButton('remove'))
   idTask += 1;
   return div;
 };
