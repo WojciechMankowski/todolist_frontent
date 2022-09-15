@@ -4,18 +4,13 @@ const input_name = document.querySelector("input");
 const btn = document.querySelector("button");
 const element_lisTasks = document.querySelector(".lisTasks");
 const categories_select = document.querySelector("#categories");
-const Tasks = [
-  {
-    title: "Kup huba do macbooka",
-    done: true,
-    category: "buy",
-  },
-];
+const Tasks = [];
 const checboxList = [];
 let removeList = [];
 
 let nextTask = 0;
 let idTask = 0;
+let nextTaskInLocalStorge = 0;
 
 const checkTheCheckbox = () => {
   const listSpan = [...element_lisTasks.querySelectorAll("span")];
@@ -25,9 +20,12 @@ const checkTheCheckbox = () => {
   checbox.classList.replace("checkbox", "done");
   const id_task = checbox.id;
   const span = listSpan[id_task];
+  removeInLocalStorage(id_task)
   Tasks[id_task].done = true;
+  saveInLocalStorage(Tasks[id_task])
   span.classList.replace("notDone", "done");
 };
+
 const removeTask = (idTask) => {
   const id = idTask - removeList.length;
   console.log(`id: ${id}`);
@@ -52,24 +50,42 @@ const getBtnRemove = () => {
     idTask++;
   });
 };
-Tasks.forEach((element) => {
-  element_lisTasks.appendChild(render(element)), (nextTask += 1);
-});
-getchecbox();
-getBtnRemove();
-
+const removeInLocalStorage = (key) => {
+  console.log(key);
+  localStorage.removeItem(key)
+  
+}
+const readInLocalStorage = () => {
+  for (let i = 0; i != localStorage.length; i++) {
+    const element = localStorage.getItem(i);
+    const task = JSON.parse(element);
+    Tasks.push(task);
+  }
+};
+const saveInLocalStorage = (data) => {
+  localStorage.setItem(nextTaskInLocalStorge, JSON.stringify(data));
+  nextTaskInLocalStorge += 1;
+};
 const addTask = () => {
   const nameTask = input_name.value;
   const category = categories_select.value;
-  Tasks.push({
+  const task = {
     title: nameTask,
     done: false,
     category: category,
-  });
+  };
+  Tasks.push(task);
+  saveInLocalStorage(task);
   element_lisTasks.appendChild(createDiv(Tasks[nextTask]));
   nextTask += 1;
   getchecbox();
   getBtnRemove();
 };
-
+readInLocalStorage();
 btn.addEventListener("click", addTask);
+Tasks.forEach((element) => {
+  element_lisTasks.appendChild(render(element)), (nextTask += 1);
+});
+
+getchecbox();
+getBtnRemove();
