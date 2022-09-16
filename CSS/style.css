@@ -16,7 +16,7 @@ body{
     height: 100vh;
     font-family: 'Montserrat', sans-serif;
     color: var(--color_text);
-    background-color: var(--color_bg);
+    /* background-color: var(--color_bg); */
 }
 header{
     background-color: var(--color_nav);
@@ -98,4 +98,16 @@ header{
 .lisTasks button i {
     width: 40px;
     height: 32px;
+}
+[data-pr]::before{
+    content: attr(data-pr);
+}
+[data-ang]::before{
+    content: attr(data-ang);
+}
+[data-home]::before{
+    content: attr(data-home);
+}
+[data-buy]::before{
+    content: attr(data-buy);
 }

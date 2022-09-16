@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="./CSS/style.css" />
 		<script src="https://kit.fontawesome.com/de4453b41c.js" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<title>Lista zadań</title>
 	</head>
 	<body>
@@ -24,8 +25,13 @@
 			</select>
 			<button class="btn_add">Dodaj zadanie</button></div>
 			<div class="lisTasks">
-
-
+			</div>
+			<div class="chart">
+				<span data-pr="0" class="chart_pr">Pr</span>
+				<spand ata-home="0" class="chart_home">Home</spand>
+				<span data-ang="0" class="chart_ang">ANG</span>
+				<span data-buy="0" class="chart_buy">BUy</span>
+				<canvas id="myChart" width="400" height="400"></canvas>
 			</div>
 			</div>
 		</div>
@@ -35,3 +41,5 @@
 		
 	</body>
 </html>
+
+
