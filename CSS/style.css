@@ -1,3 +1,11 @@
+:root{
+    --color_bg: rgba(21, 191, 129, 0.5);
+    --color_text: #131426;
+    --color_nav: #168C61;
+    --color_bg_input: rgba(22, 242, 139, 0.6);
+    --color_input_border: #F2295F;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -7,14 +15,15 @@ body{
     font-size: 2em;
     height: 100vh;
     font-family: 'Montserrat', sans-serif;
+    color: var(--color_text);
+    background-color: var(--color_bg);
 }
 header{
-    background-color: lightgray;
+    background-color: var(--color_nav);
     text-align: center;
     padding: 1rem;
 }
 .cointerner{
-    background-color: lightcyan;
     width: 80%;
     margin-right: auto;
     margin-left: auto;
@@ -32,24 +41,61 @@ header{
     height: 40px;
     margin-bottom: 1rem;
     margin-top: 1rem;
+    border: var(--color_input_border), 5px, solid;
+    border-radius: 15px;
+    background-color: var(--color_bg_input);
+    box-shadow: 0 0 10px var(--color_input_border);
+    text-align: center;
+    font-size: 1em;
 }
 .btn_add{
     width: 40%;
     height: 40px;
     font-size: 30px;
-    border: 1px solid lightgray;
-    background-color: lightgrey
+    border: 1px solid var(--color_input_border);
+    background-color: var(--color_input_border);
+    border-radius: 2em;
 }
 #categories{
     width: 50%;
     height: 40px;
     font-size: 30px;
     margin-bottom: 15px;
+    border: var(--color_input_border), 5px, solid;
+    border-radius: 5px;
+    background-color: var(--color_bg_input);
+    box-shadow: 0 0 6px var(--color_input_border);
 }
+#categories:active{
+    border: var(--color_input_border), 5px, solid;
+    border-radius: 5px;
+    background-color: var(--color_bg_input);
+    box-shadow: 0 0 6px var(--color_input_border);
+}
+
 .done {
     text-decoration: line-through;
 }
-i{
-    padding: 6px;
-    
+.lisTasks div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-self: center;
+}
+
+.lisTasks i{
+    padding: 6px; 
+}
+.lisTasks span{
+    padding: 10px;
+}
+.lisTasks button{
+    border: none;
+    background-color: transparent;
+    width: 40px;
+    height: 32px;
+}
+.lisTasks button i {
+    width: 40px;
+    height: 32px;
 }

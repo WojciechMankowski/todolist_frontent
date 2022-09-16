@@ -4,6 +4,7 @@ const input_name = document.querySelector("input");
 const btn = document.querySelector("button");
 const element_lisTasks = document.querySelector(".lisTasks");
 const categories_select = document.querySelector("#categories");
+
 const Tasks = [];
 const checboxList = [];
 let removeList = [];
@@ -69,6 +70,5 @@ btn.addEventListener("click", addTask);
 Tasks.forEach((element) => {
   element_lisTasks.appendChild(render(element)), (nextTask += 1);
 });
-
 getchecbox();
 getBtnRemove();
