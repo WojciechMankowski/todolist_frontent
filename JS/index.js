@@ -1,5 +1,5 @@
 import { createDiv, render } from "./Render.js";
-
+import { renderChart } from "./Chart.js";
 const input_name = document.querySelector("input");
 const btn = document.querySelector("button");
 const element_lisTasks = document.querySelector(".lisTasks");
@@ -15,67 +15,18 @@ let task_home = 0;
 let task_pr = 0;
 let task_ang = 0;
 let task_buy = 0;
-let sumTask = 0;
 
-const creatinChart = () => {
-
-const ctx = document.getElementById('myChart').getContext('2d');
-const myChart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-        labels: ['Angieski', 'Zakupy', "Obowiązki domowe", "Programowanie"],
-        datasets: [{
-            label: '# of Votes',
-            data: [task_ang, task_buy, task_home, task_pr],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-  
-}
 const addTaskToCategories = (category) => {
-  const span_pr = document.querySelector('.chart_pr')
-  const span_buy = document.querySelector('.chart_buy')
-  const span_ang = document.querySelector('.chart_ang')
-  const span_home = document.querySelector('.chart_home')
   if (category == "pr") {
     task_pr += 1;
-    span_pr.dataset.pr = task_pr
   } else if (category == "buy") {
     task_buy += 1;
-    span_buy.dataset.buy = task_buy
   } else if (category == "ang") {
     task_ang += 1;
-    span_ang.dataset.ang = task_ang
   } else if (category == "home") {
     task_home += 1;
-    span_home.dataset.home = task_home
   }
-  sumTask += 1;
-  creatinChart()
+  renderChart(task_ang, task_buy, task_home, task_pr);
 };
 const removeTaskToCategories = (category) => {
   if (category == "pr") {
@@ -87,7 +38,7 @@ const removeTaskToCategories = (category) => {
   } else if (category == "home") {
     task_home -= 1;
   }
-  sumTask -= 1;
+  renderChart(task_ang, task_buy, task_home, task_pr);
 };
 
 const checkTheCheckbox = () => {
@@ -103,14 +54,17 @@ const checkTheCheckbox = () => {
 };
 
 const removeTask = (idTask) => {
-  const id = idTask - removeList.length;
-  console.log(`id: ${id}`); 
-  removeTaskToCategories(Tasks[id].category)
+  let id = idTask-1;
+  removeTaskToCategories(Tasks[id].category);
   Tasks.pop(id);
-  const span = [...document.querySelectorAll("div")];
-  console.log("spans", span);
-  const el = span.filter((element) => element.id == id)[0];
-  el.remove();
+  let element_remove;
+  const div = [...element_lisTasks.querySelectorAll("div")];
+  div.filter((element) => {
+    if (element.id == id) {
+      element_remove = element;
+    }
+  });
+  element_remove.remove();
 };
 const getchecbox = () => {
   checboxList.push(...document.querySelectorAll(".checkbox"));
@@ -122,7 +76,9 @@ const getchecbox = () => {
 const getBtnRemove = () => {
   removeList = [];
   removeList.push(...document.querySelectorAll(".remove"));
+  idTask = 0;
   removeList.forEach((element) => {
+    console.log(idTask, element);
     element.addEventListener("click", () => removeTask(idTask));
     idTask++;
   });
@@ -138,6 +94,7 @@ const addTask = () => {
   };
   Tasks.push(task);
   addTaskToCategories(task.category);
+  // console.log(Tasks[nextTask]);
   element_lisTasks.appendChild(createDiv(Tasks[nextTask]));
   nextTask += 1;
   getchecbox();
@@ -150,4 +107,4 @@ Tasks.forEach((element) => {
 });
 getchecbox();
 getBtnRemove();
-creatinChart()
+renderChart(task_ang, task_buy, task_home, task_pr);
